@@ -18,7 +18,7 @@ def get_bot_id():
     if api_call.get('ok'):
         users = api_call.get('members')
         for user in users:
-            if 'name' in user and user.get('name') == BOT_NAME:
+            if user.get('name') == BOT_NAME:
                 global BOT_ID
                 BOT_ID = '<@{}>'.format(user.get('id'))
 
@@ -62,7 +62,7 @@ def handle_get_command(message, match):
 
 
 def handle_messages_read(messages):
-    if messages and len(messages) > 0:
+    if messages is not None:
         for message in messages:
             if message and 'text' in message:
                 parse_message(message)
